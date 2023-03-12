@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import "./Navbar.css";
 import InputLabel from "@mui/material/InputLabel";
@@ -11,8 +11,8 @@ const Navbar = () => {
   const myState = useSelector((state) => state.updateProps);
   const dispatch = useDispatch();
 
-  // const [num, setNum] = useState();
   const [arr, setArr] = useState([]);
+  const [num,setNum] = useState();
 
   const handlesearch = (searchAlgo) => {
     console.log(searchAlgo);
@@ -36,19 +36,22 @@ const Navbar = () => {
     });
   };
 
-  // const handleNum = (no) => {
-  //   const n = no.target.value;
-  //   setNum(n);
-  //   dispatch({
-  //     type: "UPDATE_NUM",
-  //     amt: n,
-  //   });
-  // };
+  const handleNum = (no) => {
+    var n = no;
+    setNum(n);
+    dispatch({
+      type: "UPDATE_NUM",
+      searchVal: n,
+    });
+  };
 
   const handleArray = (array) => {
     setArr(array)
     let newArr=[]
     let tokenizer = arr.split(/\W+/);
+    if(myState.searchingAlgorithm === 'binary'){
+      tokenizer.sort()
+    }
     for(let i=0; i<tokenizer.length; i++){
       newArr.push([tokenizer[i], i]);
     }
@@ -183,12 +186,12 @@ const Navbar = () => {
         {/* MAX NUMBERS CAN BE ENTERED ARE 42 */}
         <h2> Enter The Number You Want To Search : </h2>
         <input
-          id='textfield'
+          id='tf'
           type="number"
           placeholder="Enter The Number"
-          onChange={(e) => handleArray(e.target.value)}
-          value={arr}
-          className="numVal"
+          onChange={(e) => handleNum(e.target.value)}
+          value={num}
+          className="nu"
         />
       </div>
     </div>

@@ -4,6 +4,8 @@ const initialState = {
     searchingSpeed: 1000,
     play: false,
     arrVal: [],
+    searchVal:0,
+    isfound:false
   };
   
   const updateProps = (state = initialState, action) => {
@@ -20,9 +22,9 @@ const initialState = {
         return { ...state, searchingSpeed: action.searchingSpeed };
       }
   
-      // case "UPDATE_NUM": {
-      //   return { ...state, amt: action.amt };
-      // }
+      case "UPDATE_NUM": {
+        return { ...state, searchVal: action.searchVal };
+      }
       
       case "UPDATE_ARRAY": {
         return { ...state, arrVal: action.arrVal };
@@ -31,6 +33,10 @@ const initialState = {
       case 'PLAY_PAUSE': {
         return {...state,play:action.play};
      }
+
+     case 'Found': {
+      return {...state,isfound:action.isfound};
+   }
   
       default:
         return state;
