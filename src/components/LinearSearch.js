@@ -43,16 +43,24 @@ const LinearSearch = () =>{
             var intr = setInterval(()=>{
                c++;
                console.log(c);
+               document.getElementById('forPart').style.backgroundColor = 'rgb(128, 223, 254)';
+               document.getElementById('ifPart').style.backgroundColor = 'rgb(255, 255, 255, 0.5)';
+               document.getElementById('return').style.backgroundColor = 'rgb(255, 255, 255, 0.5)';
                document.getElementById(ids[i]).childNodes[0].style.backgroundColor = 'orange';
                document.getElementById(ids[i]).childNodes[0].style.borderRadius = '50px';
 
                
                //document.getElementById(ids[j-1]).childNodes[1].style.backgroundColor = ' black';
                setTimeout(() => {
+                  document.getElementById('forPart').style.backgroundColor = 'rgb(255, 255, 255, 0.5)';
+                  document.getElementById('ifPart').style.backgroundColor = 'rgb(128, 223, 254)';
+                  document.getElementById('return').style.backgroundColor = 'rgb(255, 255, 255, 0.5)';
                   if(arrVal[i] === num){
                      //    document.getElementById('ifPart').style.backgroundColor = 'rgb(255, 255, 255, 0.5)';
                      //   document.getElementById('swapPart').style.backgroundColor = 'rgb(128, 223, 254)';
-                   
+                  document.getElementById('forPart').style.backgroundColor = 'rgb(255, 255, 255, 0.5)';
+                  document.getElementById('ifPart').style.backgroundColor = 'rgb(255, 255, 255, 0.5)';
+                  document.getElementById('return').style.backgroundColor = 'rgb(128, 223, 254)';
                      document.getElementById(ids[i]).childNodes[0].style.backgroundColor = 'pink';
                      dispatch({
                         type: "Found",
@@ -74,7 +82,7 @@ const LinearSearch = () =>{
                   // }, (count+flag)*5);
                   i++;
                   }
-               }, 1000);
+               }, 2000);
                        if(i>=arrVal.length){
                         clearInterval(intr);
                        }
@@ -84,7 +92,7 @@ const LinearSearch = () =>{
                                isnotfound: true,
                             });
                      }
-                  },2000);
+                  },3000);
 
           //  }
          
@@ -131,14 +139,17 @@ const LinearSearch = () =>{
    
 
    {/* CSS code in Visuals.css */}
-   {/* <div id='codePart'>
-      <div id='ifPart'>
-         <p> if (arr[j] &gt; arr[j + 1]) </p>
+   <div id='codePart'>
+      <div id='forPart'>
+         <p> for (int i = 0; i &lt; N; i++)</p>
       </div>
-      <div id='swapPart' style={{marginLeft:'30px'}}>
-         <p> swap(arr[j], arr[j + 1]); </p>
+      <div id='ifPart' style={{marginLeft:'30px'}}>
+         <p> if (arr[i] == num) </p>
       </div>
-   </div> */}
+      <div id='return' style={{marginLeft:'60px'}}>
+         <p>return i;</p>
+      </div>
+   </div>
       {/* {isPreviewShown && <LinearCode code={CppCode} language="cpp"/>} */}
       {/* {isdone && <LinearFound/>} */}
       {isPreviewShown && <LinearCode/>}
