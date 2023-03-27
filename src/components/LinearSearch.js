@@ -2,7 +2,7 @@ import React,{useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import LinearCode from './LinearCode';
 import LinearComplexity from './LinearComplexity';
-import LinearFound from './LinearFound';
+
 
 import './Visuals.css';
 
@@ -14,7 +14,7 @@ const LinearSearch = () =>{
    let arrVal = myState.arrVal.map((item) => item[0]);
    let ids = myState.arrVal.map((item) => item[1]);
    let num = myState.searchVal;
-   var count=-1;
+   var i=0,c=0;
 
 
 
@@ -27,53 +27,68 @@ const LinearSearch = () =>{
       setPreviewShown(true);
       console.log("INTO SOLVE");
       console.log(arrVal.length);
-      for(let i = 0; i < arrVal.length; i++){
-          count++; 
+      //for(let i = 0; i < arrVal.length; i++){
+       
            
    
          // The childNodes property returns a collection (list) of an elements's child nodes. 
          // childNodes[0]->LABEL ABOVE BARS , childNodes[1]->BARS
          
          
-         setTimeout(() => {
+       //  setTimeout(() => {
             // background-image: linear-gradient(to bottom right, rgb(128, 223, 254), rgb(255, 117, 255));
             //document.getElementById('ifPart').style.backgroundColor = 'rgb(128, 223, 254)';
             // document.getElementById('ifPart').style.height = '30px';
             //document.getElementById('swapPart').style.backgroundColor = 'rgb(255, 255, 255, 0.5)';
-            console.log(ids[i]);
-                     
-                     document.getElementById(ids[i]).childNodes[0].style.backgroundColor = 'orange';
-                     document.getElementById(ids[i]).childNodes[0].style.borderRadius = '50px';
-                     //document.getElementById(ids[j-1]).childNodes[1].style.backgroundColor = ' black';
-                     setTimeout(() => {
-                        if(arrVal[i] === num){
-                       //    document.getElementById('ifPart').style.backgroundColor = 'rgb(255, 255, 255, 0.5)';
-                        //   document.getElementById('swapPart').style.backgroundColor = 'rgb(128, 223, 254)';
-                           
-                           document.getElementById(ids[i]).childNodes[0].style.backgroundColor = 'pink';
-                           dispatch({
-                              type: "Found",
-                              isfound: true,
-                            });
-                           
-                            return;
-                           
-                          // document.getElementById(ids[j-1]).style.transform = `translateX(${(j-1)*35}px)`;
-                           
-                        }
-                     // }, (count+flag)*1);
-                     }, 100);
-                        setTimeout(() => {
-                           document.getElementById(ids[i]).childNodes[0].style.backgroundColor = myState.searchingColor;
-                           document.getElementById(ids[i]).childNodes[0].style.borderRadius = '0px';
-                           //document.getElementById(ids[j]).childNodes[1].style.backgroundColor = myState.SearchingColor;
-                        // }, (count+flag)*5);
-                        }, 1000);
-                  }, count*2000);
+            var intr = setInterval(()=>{
+               c++;
+               console.log(c);
+               document.getElementById(ids[i]).childNodes[0].style.backgroundColor = 'orange';
+               document.getElementById(ids[i]).childNodes[0].style.borderRadius = '50px';
 
-            }
+               
+               //document.getElementById(ids[j-1]).childNodes[1].style.backgroundColor = ' black';
+               setTimeout(() => {
+                  if(arrVal[i] === num){
+                     //    document.getElementById('ifPart').style.backgroundColor = 'rgb(255, 255, 255, 0.5)';
+                     //   document.getElementById('swapPart').style.backgroundColor = 'rgb(128, 223, 254)';
+                   
+                     document.getElementById(ids[i]).childNodes[0].style.backgroundColor = 'pink';
+                     dispatch({
+                        type: "Found",
+                        isfound: true,
+                     });
+                     clearInterval(intr);
+              
+                     
+                     // document.getElementById(ids[j-1]).style.transform = `translateX(${(j-1)*35}px)`;
+                     
+                  }
+                  // }, (count+flag)*1);
+               }, 100);
+               setTimeout(() => {
+                  if(arrVal[i]!==num){
+                  document.getElementById(ids[i]).childNodes[0].style.backgroundColor = myState.searchingColor;
+                  document.getElementById(ids[i]).childNodes[0].style.borderRadius = '0px';
+                  //document.getElementById(ids[j]).childNodes[1].style.backgroundColor = myState.SearchingColor;
+                  // }, (count+flag)*5);
+                  i++;
+                  }
+               }, 1000);
+                       if(i>=arrVal.length){
+                        clearInterval(intr);
+                       }
+                       if(c>=arrVal.length){
+                        dispatch({
+                               type: "NotFound",
+                               isnotfound: true,
+                            });
+                     }
+                  },2000);
+
+          //  }
          
-         
+          
     
       
       setTimeout(() => {
@@ -92,6 +107,9 @@ const LinearSearch = () =>{
          console.log("KHATAM TATA BYE BYE GOOD BYE GAYA"); 
 
       },(((myState.arrVal.length-1)*(myState.arrVal.length))/2)*myState.SearchingSpeed+50);
+   
+     
+      
    }
    
    useEffect(() => {
@@ -100,6 +118,7 @@ const LinearSearch = () =>{
          if(myState.play){
             console.log("-----------PLAY IS ON------------");
             solve();
+           
          }
          return(
             <h1> HELLO JI kaisa??</h1>
@@ -129,3 +148,5 @@ const LinearSearch = () =>{
 }
 
 export default LinearSearch;
+
+

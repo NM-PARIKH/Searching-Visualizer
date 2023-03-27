@@ -5,7 +5,8 @@ const initialState = {
     play: false,
     arrVal: [],
     searchVal:0,
-    isfound:false
+    isfound:false,
+    isnotfound:false
   };
   
   const updateProps = (state = initialState, action) => {
@@ -37,6 +38,10 @@ const initialState = {
      case 'Found': {
       return {...state,isfound:action.isfound};
    }
+    
+     case 'NotFound': {
+      return {...state,isnotfound:action.isnotfound};
+ }
   
       default:
         return state;

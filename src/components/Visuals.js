@@ -47,6 +47,7 @@ const Visuals = () => {
    }
 </div>
       {myState.isfound===true && <LinearFound/>}
+      {myState.isnotfound===true && <h1 style={{color:'orange'}}> Number not Found </h1>}
 
          {/* <br/> */}
 
